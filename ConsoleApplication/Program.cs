@@ -6,10 +6,21 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            using (var db = new BooksModel())
+            {
+                var book = new Book
+                {
+                    Name = "Hamlet",
+                    Author = new Author { Name = "William Shakespeare" }
+                };
+
+                db.Books.Add(book);
+                db.SaveChanges();
+            }
         }
     }
 }
